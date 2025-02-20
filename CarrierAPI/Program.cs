@@ -1,3 +1,6 @@
+using CarrierAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CarrierAPI
 {
     public class Program
@@ -12,6 +15,9 @@ namespace CarrierAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            string connectionString = builder.Configuration["DB_CONNECTION_STRING"];
+            builder.Services.AddDbContext<ApplicationDatabaseContext>(options => options.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
