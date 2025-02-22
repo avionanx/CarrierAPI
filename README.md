@@ -11,6 +11,8 @@
 - Startup file is `Program.cs`
 - Database script is `database.sql`
 
+Hangfire is implemented, and it is available under `/hangfire` endpoint
+
 ## Running
 Run the `database.sql` script on your SQL server instance. It is generated using [ef migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli) script generation tool.
 
