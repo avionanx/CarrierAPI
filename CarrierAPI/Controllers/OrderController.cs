@@ -15,7 +15,11 @@ namespace CarrierAPI.Controllers
         {
             _service = service;
         }
-
+        /// <summary>
+        /// Creates a new order. Requires a Carrier and CarrierConfiguration to execute
+        /// </summary>
+        /// <param name="orderCreateDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] OrderCreateDTO orderCreateDTO)
         {
@@ -31,6 +35,10 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Sipariş başarıyla verildi", order });
             }
         }
+        /// <summary>
+        /// Gets all orders
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -44,6 +52,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Siparişler başarıyla döndürüldü", orders });
             }
         }
+        /// <summary>
+        /// Gets specific order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
@@ -57,6 +70,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Sipariş başarıyla bulundu", order });
             }
         }
+        /// <summary>
+        /// Deletes an order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

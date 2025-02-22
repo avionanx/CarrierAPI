@@ -16,7 +16,11 @@ namespace CarrierAPI.Controllers
         {
             _service = service;
         }
-
+        /// <summary>
+        /// Creates a new configuration. Min desi cannot be above max desi
+        /// </summary>
+        /// <param name="carrierConfigurationCreateDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CarrierConfigurationCreateDTO carrierConfigurationCreateDTO)
         {
@@ -27,7 +31,10 @@ namespace CarrierAPI.Controllers
 
             return Ok(new { message = "Kargo firması konfigürasyonu başarıyla oluşturuldu", carrierConfiguration });
         }
-        
+        /// <summary>
+        /// Returns all configurations
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CarrierConfiguration>>> GetAll()
         {
@@ -41,7 +48,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Kargo firması konfigürasyonları başarıyla getirildi", carrierConfigurations });
             }
         }
-
+        /// <summary>
+        /// Returns specific configuration
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<CarrierConfiguration>> GetSingle(int id)
         {
@@ -55,7 +66,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = $"{id} ID'li konfigürasyon bulundu", carrierConfiguration });
             }
         }
-
+        /// <summary>
+        /// Deletes a configuration
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteSingle(int id)
         {
@@ -69,7 +84,12 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Konfigürasyon başarıyla silindi" });
             }
         }
-
+        /// <summary>
+        /// Updates a configuration. Min desi cannot be above max desi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="carrierConfigurationUpdateDTO"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] CarrierConfigurationUpdateDTO carrierConfigurationUpdateDTO)
         {

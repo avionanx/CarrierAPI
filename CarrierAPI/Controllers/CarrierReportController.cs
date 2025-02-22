@@ -14,6 +14,10 @@ namespace CarrierAPI.Controllers
         {
             _service = service;
         }
+        /// <summary>
+        /// Returns all logs
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -27,6 +31,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Kayıtlar başarıyla döndürüldü", reports });
             }
         }
+        /// <summary>
+        /// Gets specific log
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
@@ -40,6 +49,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Kayıt başarıyla bulundu", report });
             }
         }
+        /// <summary>
+        /// Deletes a specific log
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

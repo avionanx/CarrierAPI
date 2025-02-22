@@ -3,6 +3,7 @@ using CarrierAPI.Repositories;
 using CarrierAPI.Services;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace CarrierAPI
 {
@@ -35,7 +36,21 @@ namespace CarrierAPI
             builder.Services.AddHangfireServer();
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Carrier API",
+                    Version = "v1",
+                    Description = "This API includes controllers for carriers, orders, configurations and logs." +
+                    "Hangfire dashboard is available at /hangfire",
+                });
+
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+
+                s.IncludeXmlComments(xmlPath);
+            });
 
             var app = builder.Build();
 

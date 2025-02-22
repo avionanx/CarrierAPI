@@ -16,7 +16,11 @@ namespace CarrierAPI.Controllers
         {
             _service = service;
         }
-
+        /// <summary>
+        /// Creates a new carrier. Carrier names do not need to be unique
+        /// </summary>
+        /// <param name="carrierCreateDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CarrierCreateDTO carrierCreateDTO)
         {
@@ -26,7 +30,10 @@ namespace CarrierAPI.Controllers
 
             return Ok(new { message = "Kargo firması başarıyla oluşturuldu", carrier });
         }
-        
+        /// <summary>
+        /// Returns all carriers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carrier>>> GetAll()
         {
@@ -40,7 +47,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Kargo firmaları başarıyla getirildi", carriers });
             }
         }
-
+        /// <summary>
+        /// Returns specific carrier
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Carrier>> GetSingle(int id)
         {
@@ -54,7 +65,11 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = $"{id} ID'li firması bulundu", carrier });
             }
         }
-
+        /// <summary>
+        /// Deletes a carrier
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteSingle(int id)
         {
@@ -68,7 +83,12 @@ namespace CarrierAPI.Controllers
                 return Ok(new { message = "Kargo firması başarıyla silindi" });
             }
         }
-
+        /// <summary>
+        /// Updates a carrier
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="carrierUpdateDTO"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] CarrierUpdateDTO carrierUpdateDTO)
         {
