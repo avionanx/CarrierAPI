@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CarrierAPI.Models;
-using CarrierAPI.Repositories;
 using CarrierAPI.DTOs;
 using CarrierAPI.Services;
 using Microsoft.IdentityModel.Tokens;

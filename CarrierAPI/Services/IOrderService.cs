@@ -1,6 +1,5 @@
 ﻿using CarrierAPI.DTOs;
 using CarrierAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CarrierAPI.Services
 {
