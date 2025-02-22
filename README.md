@@ -1,12 +1,25 @@
 # CarrierAPI
 
-# Running
-Run `database.sql` script on your SQL server instance. It is generated using [ef migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli) script generation tool.
+## Structure Overview
 
-Ensure that you have set environment variable `DB_CONNECTION_STRING` using user-secrets or replace it with any other implementation.
+##### Repository pattern is used:
+- Repositories are available under the `Repositories` folder
+- Services are available under the `Services` folder
+- Controllers are available under the `Controllers` folder
+- Entities/Models are available under the `Models` folder
+- DTOs are available under the `DTOs` folder
+- Startup file is `Program.cs`
+- Database script is `database.sql`
 
+## Running
+Run the `database.sql` script on your SQL server instance. It is generated using [ef migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli) script generation tool.
 
-# Differences & Detected Problems
-- Carrier's `CarrierConfigurationId` field was not added since that would break one-to-many relationship between Carriers and CarrierConfiguraitons, as shown on the diagram.
-- Carrier's `CarrierPlusDesiCost` field is implemented as decimal to fit CarrierConfiguration's CarrierCost field.
-- Rather than having a foreign key, there is weak relationship between CarrierReports and Carriers to prevent deletion cascades
+Ensure that you have set environment variable `DB_CONNECTION_STRING` using user-secrets via `dotnet user-secrets set`. Read more [here](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0)
+
+```console
+dotnet user-secrets set "DB_CONNECTION_STRING" "your_connection_string_here"
+```
+
+### Differences & Detected Problems
+- Carrier's `CarrierConfigurationId` field was not added to the `Carrier` entity to prevent breaking the one-to-many relationship between `Carriers` and `CarrierConfigurations`, as shown on the diagram. Adding that would result in one-to-one relationship between `Carriers` and `CarrierConfigurations`.
+- Carrier's `CarrierPlusDesiCost` field is implemented as a `decimal` type to be consistent with `CarrierConfiguration`'s `CarrierCost` field.
