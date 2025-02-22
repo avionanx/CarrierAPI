@@ -19,11 +19,12 @@ namespace CarrierAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CarrierConfigurationCreateDTO carrierCreateDTO)
+        public async Task<ActionResult> Create([FromBody] CarrierConfigurationCreateDTO carrierConfigurationCreateDTO)
         {
-            if (carrierCreateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierConfigurationCreateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierConfigurationCreateDTO.CarrierMinDesi > carrierConfigurationCreateDTO.CarrierMaxDesi) return BadRequest(new { message = "Min desi değeri max üzerinde olamaz" });
 
-            var carrierConfiguration = await _service.Create(carrierCreateDTO);
+            var carrierConfiguration = await _service.Create(carrierConfigurationCreateDTO);
 
             return Ok(new { message = "Kargo firması konfigürasyonu başarıyla oluşturuldu", carrierConfiguration });
         }
@@ -74,7 +75,7 @@ namespace CarrierAPI.Controllers
         public async Task<ActionResult> Update(int id, [FromBody] CarrierConfigurationUpdateDTO carrierConfigurationUpdateDTO)
         {
             if (carrierConfigurationUpdateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
-            
+            if (carrierConfigurationUpdateDTO.CarrierMinDesi > carrierConfigurationUpdateDTO.CarrierMaxDesi) return BadRequest(new { message = "Min desi değeri max üzerinde olamaz" });
             var result = await _service.Update(id, carrierConfigurationUpdateDTO);
 
             if (result == false)
