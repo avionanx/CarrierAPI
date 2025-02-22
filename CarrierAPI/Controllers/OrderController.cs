@@ -23,7 +23,7 @@ namespace CarrierAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] OrderCreateDTO orderCreateDTO)
         {
-            if (orderCreateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (orderCreateDTO is null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
 
             var order = await _service.Create(orderCreateDTO);
             if (order is null)

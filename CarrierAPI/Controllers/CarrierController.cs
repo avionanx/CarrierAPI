@@ -24,7 +24,7 @@ namespace CarrierAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CarrierCreateDTO carrierCreateDTO)
         {
-            if (carrierCreateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierCreateDTO is null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
 
             var carrier = await _service.Create(carrierCreateDTO);
 
@@ -56,13 +56,13 @@ namespace CarrierAPI.Controllers
         public async Task<ActionResult<Carrier>> GetSingle(int id)
         {
             var carrier = await _service.GetById(id);
-            if (carrier == null)
+            if (carrier is null)
             {
-                return NotFound();
+                return NotFound( new { message = $"{id} ID'li kargo firması bulunamadı" } );
             }
             else
             {
-                return Ok(new { message = $"{id} ID'li firması bulundu", carrier });
+                return Ok(new { message = $"{id} ID'li kargo firması bulundu", carrier });
             }
         }
         /// <summary>
@@ -92,11 +92,11 @@ namespace CarrierAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] CarrierUpdateDTO carrierUpdateDTO)
         {
-            if (carrierUpdateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierUpdateDTO is null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
             
             var result = await _service.Update(id, carrierUpdateDTO);
 
-            if (result)
+            if (result == false)
             {
                 return NotFound(new { message = $"{id} ID'li kargo firması bulunamadı" });
             }

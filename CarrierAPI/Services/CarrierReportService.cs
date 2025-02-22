@@ -48,7 +48,7 @@ namespace CarrierAPI.Services
         public async Task<bool> Delete(int id)
         {
             var report = await _carrierReportRepository.GetById(id);
-            if (report == null) return false;
+            if (report is null) return false;
 
             await _carrierReportRepository.Delete(id);
             return true;

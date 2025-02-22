@@ -24,12 +24,19 @@ namespace CarrierAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CarrierConfigurationCreateDTO carrierConfigurationCreateDTO)
         {
-            if (carrierConfigurationCreateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierConfigurationCreateDTO is null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
             if (carrierConfigurationCreateDTO.CarrierMinDesi > carrierConfigurationCreateDTO.CarrierMaxDesi) return BadRequest(new { message = "Min desi değeri max üzerinde olamaz" });
 
             var carrierConfiguration = await _service.Create(carrierConfigurationCreateDTO);
-
-            return Ok(new { message = "Kargo firması konfigürasyonu başarıyla oluşturuldu", carrierConfiguration });
+            if(carrierConfiguration is null)
+            {
+                return NotFound(new { message = $"{carrierConfigurationCreateDTO.CarrierId} ID'li herhangi bir kargo firması bulunamadı" });
+            }
+            else
+            {
+                return Ok(new { message = "Kargo firması konfigürasyonu başarıyla oluşturuldu", carrierConfiguration });
+            }
+            
         }
         /// <summary>
         /// Returns all configurations
@@ -57,9 +64,9 @@ namespace CarrierAPI.Controllers
         public async Task<ActionResult<CarrierConfiguration>> GetSingle(int id)
         {
             var carrierConfiguration = await _service.GetById(id);
-            if (carrierConfiguration == null)
+            if (carrierConfiguration is null)
             {
-                return NotFound();
+                return NotFound(new { message = $"{id} ID'li konfigürasyon bulunamadı" });
             }
             else
             {
@@ -93,7 +100,7 @@ namespace CarrierAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] CarrierConfigurationUpdateDTO carrierConfigurationUpdateDTO)
         {
-            if (carrierConfigurationUpdateDTO == null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
+            if (carrierConfigurationUpdateDTO is null) return BadRequest(new { message = "Girilen parametreler geçerli değil" });
             if (carrierConfigurationUpdateDTO.CarrierMinDesi > carrierConfigurationUpdateDTO.CarrierMaxDesi) return BadRequest(new { message = "Min desi değeri max üzerinde olamaz" });
             var result = await _service.Update(id, carrierConfigurationUpdateDTO);
 

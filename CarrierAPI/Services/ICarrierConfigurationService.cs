@@ -8,7 +8,7 @@ namespace CarrierAPI.Services
     {
         Task<IEnumerable<CarrierConfiguration>> GetAll();
         Task<CarrierConfiguration> GetById(int id);
-        Task<CarrierConfiguration> Create([FromBody] CarrierConfigurationCreateDTO carrierCreateDTO);
+        Task<CarrierConfiguration?> Create([FromBody] CarrierConfigurationCreateDTO carrierCreateDTO);
         Task<bool> Update(int id, [FromBody] CarrierConfigurationUpdateDTO carrierUpdateDTO);
         Task<bool> Delete(int id);
     }

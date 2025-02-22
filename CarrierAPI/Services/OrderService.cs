@@ -32,7 +32,7 @@ namespace CarrierAPI.Services
         public async Task<bool> Delete(int id)
         {
             var order = await _orderRepository.GetById(id);
-            if (order == null) return false;
+            if (order is null) return false;
 
             await _orderRepository.Delete(id);
             return true;

@@ -42,8 +42,12 @@ namespace CarrierAPI
                 {
                     Title = "Carrier API",
                     Version = "v1",
-                    Description = "This API includes controllers for carriers, orders, configurations and logs." +
-                    "Hangfire dashboard is available at /hangfire",
+                    Description = "This API includes controllers for carriers, orders, configurations and logs. Hangfire dashboard is available at /hangfire",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Name = "Enis Arda ÝSKENDER",
+                        Email = "ea.iskender@gmail.com"
+                    }
                 });
 
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

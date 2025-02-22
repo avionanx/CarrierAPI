@@ -29,7 +29,7 @@ namespace CarrierAPI.Services
         async Task<bool> ICarrierService.Delete(int id)
         {
             var carrier = await _carrierRepository.GetById(id);
-            if (carrier == null) return false;
+            if (carrier is null) return false;
 
             await _carrierRepository.Delete(id);
             return true;
@@ -49,7 +49,7 @@ namespace CarrierAPI.Services
         {
             var carrier = await _carrierRepository.GetById(id);
 
-            if (carrier == null) return false;
+            if (carrier is null) return false;
 
             carrier.CarrierName = carrierUpdateDTO.CarrierName;
             carrier.CarrierPlusDesiCost = carrierUpdateDTO.CarrierPlusDesiCost ?? 0;

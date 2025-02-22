@@ -38,7 +38,7 @@ namespace CarrierAPI.Repositories
 
                     if (inRange)
                     {
-                        if (bestConfig == null || config.CarrierCost < bestConfig.CarrierCost)
+                        if (bestConfig is null || config.CarrierCost < bestConfig.CarrierCost)
                         {
                             bestConfig = config;
                         }
@@ -47,7 +47,7 @@ namespace CarrierAPI.Repositories
                     {
                         int distance = Math.Min(Math.Abs(desi - config.CarrierMinDesi), Math.Abs(desi - config.CarrierMaxDesi));
 
-                        if (closestConfig == null || distance < closestDistance)
+                        if (closestConfig is null || distance < closestDistance)
                         {
                             closestConfig = config;
                             closestDistance = distance;
